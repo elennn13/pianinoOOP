@@ -2,24 +2,24 @@
 #include <conio.h>
 #include <iostream>
 
-// Конструктор
+// ГЉГ®Г­Г±ГІГ°ГіГЄГІГ®Г°
 Piano::Piano(AudioInterface* audioImpl) : audio(audioImpl) {
-    initKeys(); // Инициализация клавиш
+    initKeys(); // Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЄГ«Г ГўГЁГё
 }
 
-// Инициализация клавиш
+// Г€Г­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЄГ«Г ГўГЁГё
 void Piano::initKeys() {
-    // Добавляем клавиши с частотами нот
-    keys.emplace_back('Z', 261);   // До
-    keys.emplace_back('X', 293);   // Ре 
-    keys.emplace_back('C', 329);   // Ми 
-    keys.emplace_back('V', 349);   // Фа 
-    keys.emplace_back('B', 392);   // Соль  
-    keys.emplace_back('N', 440);   // Ля  
-    keys.emplace_back('M', 493);   // Си 
+    // Г„Г®ГЎГ ГўГ«ГїГҐГ¬ ГЄГ«Г ГўГЁГёГЁ Г± Г·Г Г±ГІГ®ГІГ Г¬ГЁ Г­Г®ГІ
+    keys.emplace_back('Z', 261);   // Г„Г®
+    keys.emplace_back('X', 293);   // ГђГҐ 
+    keys.emplace_back('C', 329);   // ГЊГЁ 
+    keys.emplace_back('V', 349);   // Г”Г  
+    keys.emplace_back('B', 392);   // Г‘Г®Г«Гј  
+    keys.emplace_back('N', 440);   // Г‹Гї  
+    keys.emplace_back('M', 493);   // Г‘ГЁ 
 }
 
-// Основной цикл программы
+// ГЋГ±Г­Г®ГўГ­Г®Г© Г¶ГЁГЄГ« ГЇГ°Г®ГЈГ°Г Г¬Г¬Г»
 void Piano::run() {
     std::cout << "   | Z | X | C | V | B | N | M |\n";
     std::cout << "   |   |   |   |   |   |   |   |\n";
@@ -27,13 +27,13 @@ void Piano::run() {
     std::cout << "     C   D   E   F   G   A   B\n\n";
 
 
-        // Отрисовка всех клавиш
+        // ГЋГІГ°ГЁГ±Г®ГўГЄГ  ГўГ±ГҐГµ ГЄГ«Г ГўГЁГё
         for (auto& key : keys) {
             key.draw();
         }
         std::cout << "\n";
-
-        // Обработка ввода
+// this if need to be wrapped by cicle for repeated hook of user hitting key
+        // ГЋГЎГ°Г ГЎГ®ГІГЄГ  ГўГўГ®Г¤Г 
         if (_kbhit()) {
             char input = _getch();
            
@@ -41,11 +41,11 @@ void Piano::run() {
                 input = toupper(input);
             }
 
-            // Поиск и нажатие соответствующей клавиши
+            // ГЏГ®ГЁГ±ГЄ ГЁ Г­Г Г¦Г ГІГЁГҐ Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГ№ГҐГ© ГЄГ«Г ГўГЁГёГЁ
             for (auto& key : keys) {
                 if (toupper(input) == key.getKeyChar()) {
                     key.press();
-                    audio->playSound(key.getFrequency()); // ПОЛИМОРФИЗМ
+                    audio->playSound(key.getFrequency()); // ГЏГЋГ‹Г€ГЊГЋГђГ”Г€Г‡ГЊ
                     break;
                 }
             }
